@@ -1,4 +1,10 @@
-from . import SamAndMaxWorld
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .world import SamAndMaxWorld
+
 from BaseClasses import Item, ItemClassification
 from .itemIds import itemIds
 

@@ -1,5 +1,11 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .world import SamAndMaxWorld
+
 from worlds.generic.Rules import set_rule
-from . import SamAndMaxWorld
 from .itemIds import itemIds
 
 def set_all_rules(world: SamAndMaxWorld) -> None:

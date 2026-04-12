@@ -1,6 +1,12 @@
-from . import SamAndMaxWorld
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .world import SamAndMaxWorld
+
 from typing import Dict
-from BaseClasses import ItemClassification, Location
+from BaseClasses import Location
 from .subclasses import SamAndMaxRegionContainer as SmRegionC
 from .regionIds import regionIds
 from .itemIds import itemIds
@@ -15,8 +21,8 @@ def locations_from_regions(regions: Dict[int, SmRegionC]) -> Dict[int, str]:
         if region.subState is not None:
             for sub in region.subState:
                 # zusammengesetzte ID als String zusammenfügen und in int umwandeln
-                # Beispiel: region_id=12, sub.item=133, sub.index=0 -> "121330" -> 121330
-                composite_id = int(f"{region_id}{sub.item}{sub.index}")
+                # Beispiel: region_id=12, sub.item=133, sub.state=0 -> "121330" -> 121330
+                composite_id = int(f"{region_id}{sub.item}{sub.state}")
                 composed_name = f"{base_name} - {sub.name}"
 
                 name_to_id[composed_name] = composite_id

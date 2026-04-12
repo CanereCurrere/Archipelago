@@ -1,4 +1,10 @@
-from . import SamAndMaxWorld
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .world import SamAndMaxWorld
+
 from .subclasses import SamAndMaxRegion, SubConnection as SubCon
 from .regionIds import regionIds
 from .itemIds import itemIds
@@ -8,7 +14,6 @@ def create_and_connect_regions(world: SamAndMaxWorld) -> None:
     connect_regions(world)
 	
 def create_all_regions(world: SamAndMaxWorld) -> None:
-    # Variante 1
     regions: list[SamAndMaxRegion] = []
 
     for item in regionIds.values():

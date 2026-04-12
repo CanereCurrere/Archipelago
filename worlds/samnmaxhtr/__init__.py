@@ -1,6 +1,12 @@
-from worlds.AutoWorld import World
-from . import SamAndMaxOptions, itemIds, regionIds, regions, items, rules, locations
+from .options import SamAndMaxOptions
+from .itemIds import itemIds
+from .regionIds import regionIds
+from . import regions
+from . import items
+from . import rules
+from . import locations
 
+from worlds.AutoWorld import World
 
 class SamAndMaxWorld(World):
     """Sam & Max Hit the Road is a graphical adventure game, originally developed and released by LucasArts in 1993 for DOS and in 1995 for Macintosh computers, being their ninth game to use the SCUMM adventure game engine. A Windows version of the game was later developed by Aaron Giles and released in 2002. It follows Sam and Max across a kitsch, tourist trap pastiche of America (featuring such locales as the World's Largest Ball of Twine and the Mystery Vortex) in search of an escaped bigfoot."""
@@ -12,8 +18,8 @@ class SamAndMaxWorld(World):
      # Our world class must have a static location_name_to_id and item_name_to_id defined.
     # We define these in regions.py and items.py respectively, so we just set them here.
     location_name_to_id = locations.locations_from_regions(regionIds)
-    
-    item_name_to_id = {item.name: id for id, item in itemIds.values()}
+
+    item_name_to_id = {item.name: id for id, item in itemIds.items()}
 
     # Auch wenn 'Save and Quit' nicht wirklich existiert, ist die Karte dennoch der allgemeine Punkt
     origin_region_name = "Map"
@@ -23,7 +29,7 @@ class SamAndMaxWorld(World):
     # For better structure and readability, we put each of these in their own file.
     def create_regions(self) -> None:
         regions.create_and_connect_regions(self)
-        regions.create_all_locations(self)
+        locations.create_all_locations(self)
 
     def create_items(self) -> None:
         items.create_all_items(self)

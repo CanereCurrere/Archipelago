@@ -1,6 +1,5 @@
 from dataclasses import dataclass
-from worlds.AutoWorld import PerGameCommonOptions
-from Options import Toggle
+from Options import Toggle, PerGameCommonOptions
 
 class MiniGame(Toggle):
     """Should the Minigames be Part of the Itempool (Junk Items)"""
