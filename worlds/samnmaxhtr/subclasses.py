@@ -1,12 +1,12 @@
 from BaseClasses import Region, Location, Item
 
-class Connection:
+class SamAndMaxLocationContainer:
     id: int
 
     def __init__(self, id: int):
         self.id = id
 
-class SubConnection(Connection):
+class SamAndMaxSubLocationContainer(SamAndMaxLocationContainer):
     item: int
     state: int
 
@@ -29,16 +29,16 @@ class SamAndMaxItem(Item):
 
 class SamAndMaxItemContainer:
     name: str
-    roomId: int
+    location: SamAndMaxLocationContainer
     progression: bool
     itemReq: list[int] | None
-    roomReq: list[int] | None
+    locationReq: list[SamAndMaxLocationContainer] | None
 
-    def __init__(self, name: str, roomId: int, itemReq: list[int] | None = None, roomReq: list[int] | None = None, progression: bool = True):
+    def __init__(self, name: str, location: SamAndMaxLocationContainer, itemReq: list[int] | None = None, locationReq: list[SamAndMaxLocationContainer] | None = None, progression: bool = True):
         self.name = name
-        self.roomId = roomId
+        self.location = location
         self.itemReq = itemReq
-        self.roomReq = roomReq
+        self.locationReq = locationReq
         self.progression = progression == True
 
 class SamAndMaxLocation(Location):
@@ -50,17 +50,27 @@ class SamAndMaxRegion(Region):
 class SamAndMaxRegionContainer:
     name: str
     itemReq: list[int] | None
-    roomReq: list[int] | None
-    connects: list[Connection] | None
+    locationReq: list[SamAndMaxLocationContainer] | None
+    connects: list[SamAndMaxLocationContainer] | None
     hasSubState: bool
     subState: list[SubRegion] | None
 
-    def __init__(self, name: str, itemReq: list[int] | None = None, roomReq: list[int] | None = None, connects: list[Connection] | None = None, subState: list[SubRegion] | None = None):
+    def __init__(self, name: str, itemReq: list[int] | None = None, locationReq: list[SamAndMaxLocationContainer] | None = None, connects: list[SamAndMaxLocationContainer] | None = None, subState: list[SubRegion] | None = None):
         self.name = name
         self.itemReq = itemReq
-        self.roomReq = roomReq
+        self.locationReq = locationReq
         self.connects = connects
         self.subState = subState
         self.hasSubState = subState is not None 
 
+class SubRegionContainer:
+    regionId: int
+    regionName: str
+    SmRegionC: SamAndMaxRegionContainer
+
+    def __init__(self, regionId: int, regionName: str, SmRegionC: SamAndMaxRegionContainer):
+        self.regionId = regionId
+        self.regionName = regionName
+        self.SmRegionC = SmRegionC
+        
     

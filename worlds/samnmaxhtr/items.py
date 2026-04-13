@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from .world import SamAndMaxWorld
+    from . import SamAndMaxWorld
 
 from BaseClasses import Item, ItemClassification
 from .itemIds import itemIds
@@ -30,5 +30,5 @@ def create_all_items(world: SamAndMaxWorld) -> None:
         if (itemId == 116 or itemId == 117 or itemId == 128) and world.options.include_minigames.value == 0:
             continue
         
-        item = world.create_item(smItem.name)
-        world.multiworld.itempool += item
+        item = create_item_from_name(world, smItem.name)
+        world.multiworld.itempool.append(item)
